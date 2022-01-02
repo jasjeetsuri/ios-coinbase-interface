@@ -42,7 +42,8 @@ class TransactionTableViewController: UITableViewController {
     super.viewDidLoad()
     TransactionTable.rowHeight = 90
     TransactionTable.backgroundColor =  UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
-    self.retrieveTransactions()
+
+    //self.tableView.reloadData()
     //retrieveTransactions()
     //self.tableView.dataSource = self
     //self.TransactionTable.dataSource = self
@@ -176,8 +177,6 @@ class TransactionTableViewController: UITableViewController {
           print("url: " + fullUrl)
         }
       }
-      self.TransactionTable.reloadData()
-      self.tableView.reloadData()
     }
   }
   }

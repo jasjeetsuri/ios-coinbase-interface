@@ -22,6 +22,8 @@ class OverviewViewController: UIViewController {
   @IBOutlet weak var Profit: UILabel!
   @IBOutlet weak var btcIcon: UIImageView!
   @IBOutlet weak var containerView: UIView!
+  @IBOutlet weak var exchangeRate1Lbl: UILabel!
+  @IBOutlet weak var exchangeRate2Lbl: UILabel!
   @IBOutlet weak var exchangeRate3Lbl: UILabel!
   //@IBOutlet weak var selectedCurrency: UILabel!
   
@@ -95,21 +97,46 @@ class OverviewViewController: UIViewController {
     self.BtcBalance.text = String(balance.Total_BTC)
     self.totalValue.text = String(balance.Total_Fiat) + " " + UserDefaults.standard.string(forKey: "currency")!
     self.rateGBP.text = String(balance.BTC_to_GBP) + " " + UserDefaults.standard.string(forKey: "currency")!
-    if UserDefaults.standard.string(forKey: "currency") != "USD" && UserDefaults.standard.string(forKey: "currency") != "EUR"{
-    self.rateEUR.text = String(balance.BTC_to_EUR) + " EUR"
-    self.rateUSD.text = String(balance.BTC_to_USD) + " USD"
-    //self.exchangeRate3Lbl.text = "Exchange rate:"
-    }
+    if UserDefaults.standard.string(forKey: "currency") == "GBP"
+      {
+        self.rateEUR.text = String(balance.BTC_to_EUR) + " EUR"
+        self.rateUSD.text = String(balance.BTC_to_USD) + " USD"
+        //self.rateEUR.text = String(balance.BTC_to_GBP) + " GBP"
+        self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: "currency")!
+        self.exchangeRate1Lbl.text = "BTC/GBP"
+        self.exchangeRate2Lbl.text = "BTC/EUR"
+        self.exchangeRate3Lbl.text = "BTC/USD"
+      }
     if UserDefaults.standard.string(forKey: "currency") == "USD" {
-    self.rateUSD.text = ""
-    self.exchangeRate3Lbl.text = ""
-    self.rateEUR.text = String(balance.BTC_to_EUR) + " EUR"
+      //self.rateUSD.text = ""
+      self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: "currency")!
+      self.exchangeRate2Lbl.text = "BTC/GBP"
+      self.rateEUR.text = String(balance.BTC_to_GBP) + " GBP"
+      self.exchangeRate3Lbl.text = "BTC/EUR"
+      self.rateUSD.text = String(balance.BTC_to_EUR) + " EUR"
+      self.rateGBP.text = String(balance.BTC_to_USD) + " USD"
     }
     if UserDefaults.standard.string(forKey: "currency") == "EUR" {
-      self.rateUSD.text = ""
-      self.exchangeRate3Lbl.text = ""
-      self.rateEUR.text = String(balance.BTC_to_USD) + " USD"
+      self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: "currency")!
+      self.exchangeRate2Lbl.text = "BTC/GBP"
+      self.rateEUR.text = String(balance.BTC_to_GBP) + " GBP"
+      self.exchangeRate3Lbl.text = "BTC/EUR"
+      self.rateUSD.text = String(balance.BTC_to_USD) + " USD"
+      self.rateGBP.text = String(balance.BTC_to_EUR) + " EUR"
     }
+    
+    if UserDefaults.standard.string(forKey: "currency") != "EUR" && UserDefaults.standard.string(forKey: "currency") != "GBP" && UserDefaults.standard.string(forKey: "currency") != "USD" {
+      self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: "currency")!
+      self.rateGBP.text = String(balance.BTC_to_GBP) + " " + UserDefaults.standard.string(forKey: "currency")!
+      
+      self.exchangeRate2Lbl.text = "BTC/USD"
+      self.rateEUR.text = String(balance.BTC_to_USD) + " USD"
+      
+      self.exchangeRate3Lbl.text = ""
+      self.rateUSD.text = ""
+      
+    }
+    
     if balance.isUp == "True"{
     self.Profit.text = "+" + String(balance.Profit) + " " + UserDefaults.standard.string(forKey: "currency")!
       self.Profit.textColor = UIColor.green
