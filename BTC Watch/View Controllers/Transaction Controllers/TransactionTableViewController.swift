@@ -60,7 +60,7 @@ class TransactionTableViewController: UITableViewController {
     if incoming[indexPath.row] == "true" {
   let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath as IndexPath) as! TransactionTableViewCell
           if count != 0 {
-              cell.buyLbl.text = "Received"
+              cell.buyLbl.text = "Purchased"
               cell.valueLbl.text = "Value"
               cell.costLbl.text = "Cost"
               //cell.dateLbl.text = "Date:"
@@ -88,7 +88,7 @@ class TransactionTableViewController: UITableViewController {
     if incoming[indexPath.row] == "false" {
       let cell = tableView.dequeueReusableCell(withIdentifier: "CostTxTableViewCell", for: indexPath as IndexPath) as! CostTxTableViewCell
       if count != 0 {
-        cell.sentLbl.text = "Sent"
+        cell.sentLbl.text = "Sold"
         cell.costLbl.text = "Cost"
         cell.dateLbl.text = "Date:"
         //cell.btcLbl.text = "BTC"
