@@ -98,7 +98,7 @@ class OverviewViewController: UIViewController {
     if UserDefaults.standard.string(forKey: "currency") != "USD" && UserDefaults.standard.string(forKey: "currency") != "EUR"{
     self.rateEUR.text = String(balance.BTC_to_EUR) + " EUR"
     self.rateUSD.text = String(balance.BTC_to_USD) + " USD"
-    self.exchangeRate3Lbl.text = "Exchange rate:"
+    //self.exchangeRate3Lbl.text = "Exchange rate:"
     }
     if UserDefaults.standard.string(forKey: "currency") == "USD" {
     self.rateUSD.text = ""

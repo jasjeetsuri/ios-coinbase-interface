@@ -22,27 +22,49 @@ class TransactionTableViewController: UITableViewController {
   var gain = [String]()
   
   @IBOutlet var TransactionTable: UITableView!
+
+  @objc func refresh(sender:AnyObject)
+  {
+      // Updating your data here...
+
+    DispatchQueue.main.async {
+        // Run UI Updates
+      self.retrieveTransactions()
+      
+    }
+
+    self.tableView.reloadData()
+    self.refreshControl?.endRefreshing()
+    
+  }
   
   override func viewDidLoad() {
-        super.viewDidLoad()
-        TransactionTable.rowHeight = 90
+    super.viewDidLoad()
+    TransactionTable.rowHeight = 90
     TransactionTable.backgroundColor =  UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
-        self.retrieveTransactions()
-    self.tableView.dataSource = self
-    self.TransactionTable.dataSource = self
-    self.TransactionTable.reloadData()
-    self.tableView.reloadData()
+    self.retrieveTransactions()
+    //retrieveTransactions()
+    //self.tableView.dataSource = self
+    //self.TransactionTable.dataSource = self
+    //self.TransactionTable.reloadData()
+    //self.tableView.reloadData()
     TransactionTable.separatorColor = UIColor.darkGray
     UINavigationBar.appearance().barStyle = .black
     UITabBar.appearance().barStyle = .black
     
+    
+    self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+
+    
     }
+
   
-  override func viewWillAppear(_ animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.retrieveTransactions()
     self.TransactionTable.reloadData()
-    self.tableView.reloadData()
+    //self.tableView.reloadData()
+    
   }
 
     override func didReceiveMemoryWarning() {
@@ -63,7 +85,7 @@ class TransactionTableViewController: UITableViewController {
               cell.buyLbl.text = "Purchased"
               cell.valueLbl.text = "Value"
               cell.costLbl.text = "Cost"
-              //cell.dateLbl.text = "Date:"
+              //cell.dateLbl.text = ""
               //cell.btcLbl.text = "BTC"
               cell.buyBtcValue.text = btc[indexPath.row] + " BTC"
               cell.valueAmount.text = value[indexPath.row]
