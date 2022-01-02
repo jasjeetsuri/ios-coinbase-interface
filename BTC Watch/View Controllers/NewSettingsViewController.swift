@@ -46,7 +46,7 @@ class NewSettingsViewController: UIViewController, UITableViewDelegate, UITableV
   }
 
   override func viewDidAppear(_ animated: Bool) {
-    //tableView.reloadData()
+    tableView.reloadData()
     gradientLayer.isHidden = true
   }
   
