@@ -36,7 +36,7 @@ class MyMSAL{
 
 
 
-func SetupMSAL(vc: UIViewController) {
+func SetupMSAL() {
   do {
   let siginPolicyAuthority = try getAuthority(forPolicy: MyVariables.kSignupOrSigninPolicy)
   let editProfileAuthority = try getAuthority(forPolicy: MyVariables.kEditProfilePolicy)
@@ -47,48 +47,107 @@ func SetupMSAL(vc: UIViewController) {
   pcaConfig.knownAuthorities = [siginPolicyAuthority, editProfileAuthority]
   
     MyVariables.applicationContext = try MSALPublicClientApplication(configuration: pcaConfig)
-    initWebViewParams(vc: vc)
-    
+
   } catch {
       //MyVariables.updateLoggingText(text: "Unable to create application \(error)")
+    print("fail1")
+  }
+}
+
+
+  
+  func signOut() {
+      do {
+          /**
+           Removes all tokens from the cache for this application for the provided account
+           
+           - account:    The account to remove from the cache
+           */
+          
+        let thisAccount = try getAccountByPolicy(withAccounts: MyVariables.applicationContext.allAccounts(), policy: MyVariables.kSignupOrSigninPolicy)
+          
+          if let accountToRemove = thisAccount {
+            try MyVariables.applicationContext.remove(accountToRemove)
+          } else {
+              //self.updateLoggingText(text: "There is no account to signing out!")
+          }
+
+          
+          //self.updateLoggingText(text: "Signed out")
+          
+      } catch  {
+          //self.updateLoggingText(text: "Received error signing out: \(error)")
+      }
   }
 
   
-  func interactiveLogin() {
-        do {
-            let authority = try getAuthority(forPolicy: MyVariables.kSignupOrSigninPolicy)
+  func refreshToken() -> String{
+      
+      do {
+          
+          let authority = try getAuthority(forPolicy: MyVariables.kSignupOrSigninPolicy)
 
-            
-          let parameters = MSALInteractiveTokenParameters(scopes: MyVariables.kScopes, webviewParameters: MyVariables.webViewParamaters!)
-            parameters.promptType = .selectAccount
-            parameters.loginHint = "jasjeet@pm.me"
-            parameters.authority = authority
-            //parameters.webviewType = .wkWebView
-        
-            
-          MyVariables.applicationContext.acquireToken(with: parameters) { (result, error) in
-                
-                guard let result = result else {
-                  //MyVariables.updateLoggingText(text: "Could not acquire token: \(error ?? "No error informarion" as! Error)")
-                    return
-                }
-                
-                //MyVariables.accessToken = result.accessToken
-                MyVariables.token = result.accessToken
-                //self.updateLoggingText(text: "Access token is \(self.accessToken ?? "Empty")")
-                /*self.signOutButton.isEnabled = true
-                self.callGraphButton.isEnabled = true
-                self.editProfileButton.isEnabled = true
-                self.refreshTokenButton.isEnabled = true*/
+        guard let thisAccount = try getAccountByPolicy(withAccounts: MyVariables.applicationContext.allAccounts(), policy: MyVariables.kSignupOrSigninPolicy) else {
+              //self.updateLoggingText(text: "There is no account available!")
+            return "There is no account available!"
+          }
+          
+        let parameters = MSALSilentTokenParameters(scopes: MyVariables.kScopes, account:thisAccount)
+          parameters.authority = authority
+          MyVariables.applicationContext.acquireTokenSilent(with: parameters) { (result, error) in
+              if let error = error {
+                  
+                  let nsError = error as NSError
+                  
+                  // interactionRequired means we need to ask the user to sign-in. This usually happens
+                  // when the user's Refresh Token is expired or if the user has changed their password
+                  // among other possible reasons.
+                  
+                  if (nsError.domain == MSALErrorDomain) {
+                      
+                      if (nsError.code == MSALError.interactionRequired.rawValue) {
+                          
+                          // Notice we supply the account here. This ensures we acquire token for the same account
+                          // as we originally authenticated.
+                          
+                          let parameters = MSALInteractiveTokenParameters(scopes: MyVariables.kScopes, webviewParameters: MyVariables.webViewParamaters!)
+                          parameters.account = thisAccount
+                          
+                        MyVariables.applicationContext.acquireToken(with: parameters) { (result, error) in
+                              
+                              guard let result = result else {
+                                  //self.updateLoggingText(text: "Could not acquire new token: \(error ?? "No error informarion" as! Error)")
+                                  return
+                              }
+                              
+                            MyVariables.token = result.accessToken
+                              //self.updateLoggingText(text: "Access token is \(self.accessToken ?? "empty")")
+                            
+                          }
+                          return
+                      }
+                  }
+                  
+                  //self.updateLoggingText(text: "Could not acquire token: \(error)")
+                  return
+              }
               
-                //self.showSecondViewController()
-            }
-        } catch {
-            //self.updateLoggingText(text: "Unable to create authority \(error)")
-        }
-    }
-  
-  
+              guard let result = result else {
+                  
+                  //self.updateLoggingText(text: "Could not acquire token: No result returned")
+                  return
+              }
+              
+            MyVariables.token = result.accessToken
+              //self.updateLoggingText(text: "Refreshing token silently")
+              //self.updateLoggingText(text: "Refreshed access token is \(self.accessToken ?? "empty")")
+              return
+          }
+      } catch {
+          //self.updateLoggingText(text: "Unable to construct parameters before calling acquire token \(error)")
+      }
+    return MyVariables.token!
+  }
   
 }
 func getAuthority(forPolicy policy: String) throws -> MSALB2CAuthority {
@@ -103,4 +162,20 @@ func getAuthority(forPolicy policy: String) throws -> MSALB2CAuthority {
 func initWebViewParams(vc: UIViewController) {
   MyVariables.webViewParamaters = MSALWebviewParameters(authPresentationViewController: vc)
 }
-}
+
+
+  func getAccountByPolicy (withAccounts accounts: [MSALAccount], policy: String) throws -> MSALAccount? {
+      
+      for account in accounts {
+          // This is a single account sample, so we only check the suffic part of the object id,
+          // where object id is in the form of <object id>-<policy>.
+          // For multi-account apps, the whole object id needs to be checked.
+          if let homeAccountId = account.homeAccountId, let objectId = homeAccountId.objectId {
+              if objectId.hasSuffix(policy.lowercased()) {
+                  return account
+              }
+          }
+      }
+      return nil
+  }
+  

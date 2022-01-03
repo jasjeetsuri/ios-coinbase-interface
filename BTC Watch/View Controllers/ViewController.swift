@@ -62,7 +62,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        do {
+       /* do {
             
             let siginPolicyAuthority = try self.getAuthority(forPolicy: self.kSignupOrSigninPolicy)
             let editProfileAuthority = try self.getAuthority(forPolicy: self.kEditProfilePolicy)
@@ -73,60 +73,62 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
             pcaConfig.knownAuthorities = [siginPolicyAuthority, editProfileAuthority]
             
             self.applicationContext = try MSALPublicClientApplication(configuration: pcaConfig)
-            self.initWebViewParams()
+            //self.initWebViewParams()
             
         } catch {
             self.updateLoggingText(text: "Unable to create application \(error)")
-        }
+        }*/
       initUI()
 
     }
     
-    func initWebViewParams() {
-        self.webViewParamaters = MSALWebviewParameters(authPresentationViewController: self)
-    }
-    
 
   @objc func signInButton(_ sender: UIButton) {
-    //let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    //let homeView  = storyBoard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-    //let myVar =  MyMSAL.SetupMSAL(homeView)
-    //myVar.SetupMSAL(vc: self)
+
+    let myVar =  MyMSAL()
+    myVar.SetupMSAL()
+    MyVariables.webViewParamaters = MSALWebviewParameters(authPresentationViewController: self)
+    self.interactiveLogin()
+
     
   }
   
   
-  @objc func authorizationButton() {
+  
+  func interactiveLogin() {
         do {
-            let authority = try self.getAuthority(forPolicy: self.kSignupOrSigninPolicy)
+            let authority = try getAuthority(forPolicy: MyVariables.kSignupOrSigninPolicy)
 
             
-            let parameters = MSALInteractiveTokenParameters(scopes: kScopes, webviewParameters: self.webViewParamaters!)
+          let parameters = MSALInteractiveTokenParameters(scopes: MyVariables.kScopes, webviewParameters: MyVariables.webViewParamaters!)
             parameters.promptType = .selectAccount
             parameters.loginHint = "jasjeet@pm.me"
             parameters.authority = authority
             //parameters.webviewType = .wkWebView
         
             
-            applicationContext.acquireToken(with: parameters) { (result, error) in
+          MyVariables.applicationContext.acquireToken(with: parameters) { (result, error) in
                 
                 guard let result = result else {
-                    self.updateLoggingText(text: "Could not acquire token: \(error ?? "No error informarion" as! Error)")
+                  //MyVariables.updateLoggingText(text: "Could not acquire token: \(error ?? "No error informarion" as! Error)")
+                  print(error)
                     return
                 }
                 
-                self.accessToken = result.accessToken
+                //MyVariables.accessToken = result.accessToken
                 MyVariables.token = result.accessToken
-                self.updateLoggingText(text: "Access token is \(self.accessToken ?? "Empty")")
+                //self.updateLoggingText(text: "Access token is \(self.accessToken ?? "Empty")")
                 /*self.signOutButton.isEnabled = true
                 self.callGraphButton.isEnabled = true
                 self.editProfileButton.isEnabled = true
                 self.refreshTokenButton.isEnabled = true*/
               
                 self.showSecondViewController()
+            
             }
         } catch {
-            self.updateLoggingText(text: "Unable to create authority \(error)")
+          print("fail3")
+            print(error)
         }
     }
     
@@ -142,99 +144,8 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
   
 
     
-    func refreshToken() -> String{
-        
-        do {
-            
-            let authority = try self.getAuthority(forPolicy: self.kSignupOrSigninPolicy)
-
-            guard let thisAccount = try self.getAccountByPolicy(withAccounts: applicationContext.allAccounts(), policy: kSignupOrSigninPolicy) else {
-                self.updateLoggingText(text: "There is no account available!")
-              return "There is no account available!"
-            }
-            
-            let parameters = MSALSilentTokenParameters(scopes: kScopes, account:thisAccount)
-            parameters.authority = authority
-            self.applicationContext.acquireTokenSilent(with: parameters) { (result, error) in
-                if let error = error {
-                    
-                    let nsError = error as NSError
-                    
-                    // interactionRequired means we need to ask the user to sign-in. This usually happens
-                    // when the user's Refresh Token is expired or if the user has changed their password
-                    // among other possible reasons.
-                    
-                    if (nsError.domain == MSALErrorDomain) {
-                        
-                        if (nsError.code == MSALError.interactionRequired.rawValue) {
-                            
-                            // Notice we supply the account here. This ensures we acquire token for the same account
-                            // as we originally authenticated.
-                            
-                            let parameters = MSALInteractiveTokenParameters(scopes: self.kScopes, webviewParameters: self.webViewParamaters!)
-                            parameters.account = thisAccount
-                            
-                            self.applicationContext.acquireToken(with: parameters) { (result, error) in
-                                
-                                guard let result = result else {
-                                    self.updateLoggingText(text: "Could not acquire new token: \(error ?? "No error informarion" as! Error)")
-                                    return
-                                }
-                                
-                                self.accessToken = result.accessToken
-                                self.updateLoggingText(text: "Access token is \(self.accessToken ?? "empty")")
-                              
-                            }
-                            return
-                        }
-                    }
-                    
-                    self.updateLoggingText(text: "Could not acquire token: \(error)")
-                    return
-                }
-                
-                guard let result = result else {
-                    
-                    self.updateLoggingText(text: "Could not acquire token: No result returned")
-                    return
-                }
-                
-                self.accessToken = result.accessToken
-              MyVariables.token = result.accessToken
-                self.updateLoggingText(text: "Refreshing token silently")
-                self.updateLoggingText(text: "Refreshed access token is \(self.accessToken ?? "empty")")
-                return 
-            }
-        } catch {
-            self.updateLoggingText(text: "Unable to construct parameters before calling acquire token \(error)")
-        }
-      return self.accessToken!
-    }
     
-    
-    @objc func signoutButton(_ sender: UIButton) {
-        do {
-            /**
-             Removes all tokens from the cache for this application for the provided account
-             
-             - account:    The account to remove from the cache
-             */
-            
-            let thisAccount = try self.getAccountByPolicy(withAccounts: applicationContext.allAccounts(), policy: kSignupOrSigninPolicy)
-            
-            if let accountToRemove = thisAccount {
-                try applicationContext.remove(accountToRemove)
-            } else {
-                self.updateLoggingText(text: "There is no account to signing out!")
-            }
 
-            
-            self.updateLoggingText(text: "Signed out")
-            
-        } catch  {
-            self.updateLoggingText(text: "Received error signing out: \(error)")
-        }
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -255,7 +166,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
   override func viewDidAppear(_ animated: Bool) {
       
       if self.accessToken == nil {
-          authorizationButton()
+          //authorizationButton()
         
       }
   }
@@ -275,23 +186,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         return nil
     }
     
-    /**
-     
-     The way B2C knows what actions to perform for the user of the app is through the use of `Authority URL`.
-     It is of the form `https://<instance/tfp/<tenant>/<policy>`, where `<instance>` is the
-     directory host (e.g. https://login.microsoftonline.com), `<tenant>` is a
-     identifier within the directory itself (e.g. a domain associated to the
-     tenant, such as contoso.onmicrosoft.com), and `<policy>` is the policy you wish to
-     use for the current user flow.
-     */
-    func getAuthority(forPolicy policy: String) throws -> MSALB2CAuthority {
-        guard let authorityURL = URL(string: String(format: self.kEndpoint, self.kAuthorityHostName, self.kTenantName, policy)) else {
-            throw NSError(domain: "SomeDomain",
-                          code: 1,
-                          userInfo: ["errorDescription": "Unable to create authority URL!"])
-        }
-        return try MSALB2CAuthority(url: authorityURL)
-    }
+
     
     func updateLoggingText(text: String) {
         DispatchQueue.main.async{
@@ -318,21 +213,7 @@ extension ViewController {
     signInButton.widthAnchor.constraint(equalToConstant: 300.0).isActive = true
     signInButton.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
 
-
-    // Add sign out button
-    signOutButton = UIButton()
-    signOutButton.translatesAutoresizingMaskIntoConstraints = false
-    signOutButton.setTitle("Sign Out", for: .normal)
-    signOutButton.setTitleColor(.blue, for: .normal)
-    signOutButton.setTitleColor(.gray, for: .disabled)
-    signOutButton.addTarget(self, action: #selector(signoutButton(_:)), for: .touchUpInside)
-    self.view.addSubview(signOutButton)
-
-    signOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    signOutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 380.0).isActive = true
-    signOutButton.widthAnchor.constraint(equalToConstant: 150.0).isActive = true
-    signOutButton.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
-          
+  
 
     self.view.backgroundColor =  UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
     }

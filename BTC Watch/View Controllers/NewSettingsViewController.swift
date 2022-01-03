@@ -26,6 +26,7 @@ class NewSettingsViewController: UIViewController, UITableViewDelegate, UITableV
   //@IBOutlet weak var xpubSetting: UITextField!
   //@IBOutlet weak var myTable: UITableView!
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var signOutLabel: UILabel!
   
   //MARK: Methods
   
@@ -91,7 +92,7 @@ extension NewSettingsViewController: UITextFieldDelegate {
 
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 4
+    return 6
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -182,7 +183,22 @@ extension NewSettingsViewController: UITextFieldDelegate {
       
       return(cell)
     }
-  
+    
+    if indexPath.row == 4 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: BlankTableViewCell.self)) as! BlankTableViewCell
+
+      cell.backgroundColor = UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
+      
+      return(cell)
+    }
+    if indexPath.row == 5 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SignOutTableViewCell.self)) as! SignOutTableViewCell
+      cell.signOutLabel.text = "Sign out"
+
+      cell.backgroundColor = UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
+      
+      return(cell)
+    }
     return UITableViewCell()
   }
   
@@ -193,6 +209,18 @@ extension NewSettingsViewController: UITextFieldDelegate {
     if indexPath.row == 3 {
       self.performSegue(.showCurrencySelection, sender: self)
     }
+    
+    if indexPath.row == 5 {
+      //self.performSegue(.showCurrencySelection, sender: self)
+      let myVar =  MyMSAL()
+      myVar.signOut()
+     print("signing out")
+      let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+      let homeView  = storyBoard.instantiateViewController(withIdentifier: "signInPage") as! UIViewController
+      homeView.modalPresentationStyle = .fullScreen
+      self.present(homeView, animated: true, completion: nil)
+    }
+    
   }
 }
 

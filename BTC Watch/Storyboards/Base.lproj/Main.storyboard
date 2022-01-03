@@ -25,7 +25,7 @@
         <!--View Controller-->
         <scene sceneID="p32-WH-Np4">
             <objects>
-                <viewController id="RBg-X7-d0c" customClass="ViewController" customModule="BTC_Watch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signInPage" id="RBg-X7-d0c" customClass="ViewController" customModule="BTC_Watch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7I7-6r-v8v"/>
                         <viewControllerLayoutGuide type="bottom" id="LtY-Xf-k9l"/>
@@ -627,6 +627,34 @@
                                             <outlet property="currencySettingLabel" destination="81e-iK-JDv" id="BGm-aM-i2R"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BlankTableViewCell" id="9YT-Pz-xxJ" userLabel="Blank" customClass="BlankTableViewCell" customModule="BTC_Watch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="264.33333015441895" width="375" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9YT-Pz-xxJ" id="eX1-us-Ncg">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SignOutTableViewCell" id="zTF-pe-Xhh" userLabel="SignOut" customClass="SignOutTableViewCell" customModule="BTC_Watch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="307.99999809265137" width="375" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zTF-pe-Xhh" id="RWJ-3T-Uxv">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLK-e1-gf9">
+                                                    <rect key="frame" x="137" y="13" width="100" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="signOutLabel" destination="XLK-e1-gf9" id="Gye-aG-DAB"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="ipq-dP-ami" id="bLM-ac-yuk"/>
@@ -653,7 +681,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36x-f6-4mH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1430.4347826086957" y="154.89130434782609"/>
+            <point key="canvasLocation" x="1429.5999999999999" y="154.43349753694582"/>
         </scene>
         <!--Currency-->
         <scene sceneID="TTQ-xa-R9C">

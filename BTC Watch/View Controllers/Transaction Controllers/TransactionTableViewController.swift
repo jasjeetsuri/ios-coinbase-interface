@@ -166,8 +166,10 @@ class TransactionTableViewController: UITableViewController {
             self.incoming.append(subJson["incoming"].stringValue)
             self.gain.append(subJson["gain"].stringValue)
           }
-          let string = MyVariables.token
-          print("Global variable:\(string ?? "aa")")
+       
+          let myVar =  MyMSAL()
+          let newToken = myVar.refreshToken()
+          print("Global variable: \(newToken)")
   
           
         case let .failure(error):
