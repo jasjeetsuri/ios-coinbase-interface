@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import MSAL
 
 
 class TransactionTableViewController: UITableViewController {
@@ -167,7 +166,8 @@ class TransactionTableViewController: UITableViewController {
             self.incoming.append(subJson["incoming"].stringValue)
             self.gain.append(subJson["gain"].stringValue)
           }
-          print("success")
+          let string = MyVariables.token
+          print("Global variable:\(string ?? "aa")")
   
           
         case let .failure(error):

@@ -59,7 +59,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     var editProfileButton: UIButton!
     var refreshTokenButton: UIButton!
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         do {
@@ -88,7 +88,11 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     
 
   @objc func signInButton(_ sender: UIButton) {
-    authorizationButton()
+    //let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    //let homeView  = storyBoard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+    //let myVar =  MyMSAL.SetupMSAL(homeView)
+    //myVar.SetupMSAL(vc: self)
+    
   }
   
   
@@ -112,6 +116,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
                 }
                 
                 self.accessToken = result.accessToken
+                MyVariables.token = result.accessToken
                 self.updateLoggingText(text: "Access token is \(self.accessToken ?? "Empty")")
                 /*self.signOutButton.isEnabled = true
                 self.callGraphButton.isEnabled = true
@@ -195,6 +200,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
                 }
                 
                 self.accessToken = result.accessToken
+              MyVariables.token = result.accessToken
                 self.updateLoggingText(text: "Refreshing token silently")
                 self.updateLoggingText(text: "Refreshed access token is \(self.accessToken ?? "empty")")
                 return 

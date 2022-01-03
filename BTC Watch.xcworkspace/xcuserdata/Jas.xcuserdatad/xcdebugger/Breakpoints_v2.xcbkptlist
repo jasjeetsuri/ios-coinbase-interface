@@ -20,5 +20,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D2E9283F-B32B-42FB-96A8-9D71750A5A26"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BTC Watch/API/TransactionApi.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "asURLRequest()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D2E9283F-B32B-42FB-96A8-9D71750A5A26 - bca0e290e61cc485"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "route.getter : (path: Swift.String, parameters: Swift.Dictionary&lt;Swift.String, Any&gt;, method: Alamofire.HTTPMethod, secure: Swift.Bool)"
+                  moduleName = "BTC Watch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Jas/Desktop/BTCWatchCB/BTC%20Watch/API/TransactionApi.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "71">
+               </Location>
+               <Location
+                  uuid = "D2E9283F-B32B-42FB-96A8-9D71750A5A26 - bca0e290e61cc485"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "route.getter : (path: Swift.String, parameters: Swift.Dictionary&lt;Swift.String, Any&gt;, method: Alamofire.HTTPMethod, secure: Swift.Bool)"
+                  moduleName = "BTC Watch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Jas/Desktop/BTCWatchCB/BTC%20Watch/API/TransactionApi.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "1014">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

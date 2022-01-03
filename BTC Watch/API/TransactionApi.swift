@@ -42,7 +42,7 @@ class TransactionApi {
       var route: (path: String, parameters: [String: Any], method: HTTPMethod, secure: Bool) {
         switch self {
         case .retrieveTransactions:
-          let params: [String : Any] = ["code" : "LN0hapy1i1ZLmbZf6cvDJuS2Z12gZU1EsSCnTKDANB9eoV5pNVTqsA", "apikey" : "ad22a179fd437b964837d8f6d33fc961", "passphrase" : "wqe8ukkb9oh", "secret" :"TKpzr3QY55d4zgmdgoe5XbfGKv7A99d93q08/5qoD2UyfCCrML3utgWwC7h9X2RX+3SGNcqe6k5IIHmWyElfDA==", "currency" : UserDefaults.standard.string(forKey: "currency")!]
+          let params: [String : Any] = ["code" : "LN0hapy1i1ZLmbZf6cvDJuS2Z12gZU1EsSCnTKDANB9eoV5pNVTqsA", "apikey" : "ad22a179fd437b964837d8f6d33fc961", "passphrase" : "wqe8ukkb9oh", "secret" :"", "currency" : UserDefaults.standard.string(forKey: "currency")!]
           return (baseUrl + "/api/cbTransactions", params, .get, false)
           
           //case .loginStatus:

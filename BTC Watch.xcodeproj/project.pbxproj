@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		410D91AD27827FB10092A1B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91AC27827FB10092A1B1 /* ViewController.swift */; };
+		410D91AF278337BB0092A1B1 /* MSALVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91AE278337BB0092A1B1 /* MSALVars.swift */; };
 		41208EB41FB72C1000F45A9F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41208EB31FB72C1000F45A9F /* SettingsViewController.swift */; };
 		412F3A9A1FD7250C00DAD9D5 /* TouchIdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F3A991FD7250C00DAD9D5 /* TouchIdTableViewCell.swift */; };
 		4153C0342781B7130060EE75 /* ApiKeyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153C0332781B7130060EE75 /* ApiKeyTableViewCell.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		06A0030569A298496C99C888 /* Pods-BTC Watch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTC Watch.release.xcconfig"; path = "Pods/Target Support Files/Pods-BTC Watch/Pods-BTC Watch.release.xcconfig"; sourceTree = "<group>"; };
 		410D91AC27827FB10092A1B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		410D91AE278337BB0092A1B1 /* MSALVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALVars.swift; sourceTree = "<group>"; };
 		41208EB31FB72C1000F45A9F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		412F3A991FD7250C00DAD9D5 /* TouchIdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIdTableViewCell.swift; sourceTree = "<group>"; };
 		4153C0332781B7130060EE75 /* ApiKeyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyTableViewCell.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				C9C382F51FC0E8F10040D99F /* Colours.swift */,
 				C9C382F91FC0E9B20040D99F /* SegueIdentityProvider.swift */,
+				410D91AE278337BB0092A1B1 /* MSALVars.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				C9C383041FC0F16A0040D99F /* Networking.swift in Sources */,
 				417B667B1FC07E73004E5CD2 /* NewSettingsViewController.swift in Sources */,
 				C9C382F21FC0D4110040D99F /* SegueIdentifiers.swift in Sources */,
+				410D91AF278337BB0092A1B1 /* MSALVars.swift in Sources */,
 				417B66861FC1F5E3004E5CD2 /* Transaction.swift in Sources */,
 				4153C0362781B72C0060EE75 /* PassphraseTableViewCell.swift in Sources */,
 				417B66881FC1F65D004E5CD2 /* TransactionApi.swift in Sources */,
