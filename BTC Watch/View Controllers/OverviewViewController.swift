@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import MSAL
 
 class OverviewViewController: UIViewController {
   
@@ -29,11 +30,15 @@ class OverviewViewController: UIViewController {
   
   // MARK: - View Life Cycle
   
+
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     UINavigationBar.appearance().barStyle = .black
     UITabBar.appearance().barStyle = .black
+    self.navigationItem.hidesBackButton = true;
+    self.navigationItem.backButtonDisplayMode = .generic
     //preferredStatusBarStyle = .lightContent
     // UI Setup
     spinner.style = UIActivityIndicatorView.Style.whiteLarge
@@ -42,17 +47,25 @@ class OverviewViewController: UIViewController {
     //btcIcon.isHidden = true
     spinner.hidesWhenStopped = true
 
+    
     self.retrieveBalance()
+    
+    
+    
+    
   }
+
+  
 
   
   func retrieveBalance() {
     guard UserDefaults.standard.string(forKey: "apikey") != "" else {
       self.resetLabels()
       self.invalidXpub.text = "Add API Key"
+      
       return
     }
-    
+    self.navigationItem.hidesBackButton = true;
     self.startLoading()
     Networking.retrieveBalance(withSuccess: { (balance) in
       self.setLabels(withBTC: balance)
@@ -119,8 +132,8 @@ class OverviewViewController: UIViewController {
     if UserDefaults.standard.string(forKey: "currency") == "EUR" {
       self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: "currency")!
       self.exchangeRate2Lbl.text = "BTC/GBP"
+      self.exchangeRate3Lbl.text = "BTC/USD"
       self.rateEUR.text = String(balance.BTC_to_GBP) + " GBP"
-      self.exchangeRate3Lbl.text = "BTC/EUR"
       self.rateUSD.text = String(balance.BTC_to_USD) + " USD"
       self.rateGBP.text = String(balance.BTC_to_EUR) + " EUR"
     }

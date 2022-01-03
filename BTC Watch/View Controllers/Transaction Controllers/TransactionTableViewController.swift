@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import MSAL
 
 
 class TransactionTableViewController: UITableViewController {
@@ -124,7 +125,6 @@ class TransactionTableViewController: UITableViewController {
         cell.backgroundColor = UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
         return cell
       }
-
     }
     
     self.TransactionTable.reloadData()
@@ -167,7 +167,9 @@ class TransactionTableViewController: UITableViewController {
             self.incoming.append(subJson["incoming"].stringValue)
             self.gain.append(subJson["gain"].stringValue)
           }
-        
+          print("success")
+  
+          
         case let .failure(error):
             print("fail")
           print("api key: " + UserDefaults.standard.string(forKey: "apikey")!)

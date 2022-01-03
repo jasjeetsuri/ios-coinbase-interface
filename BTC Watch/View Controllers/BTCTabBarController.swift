@@ -28,10 +28,13 @@ class BTCTabBarController: UITabBarController {
 extension BTCTabBarController: UITabBarControllerDelegate {
   
   func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+    self.navigationItem.hidesBackButton = true;
+    self.navigationItem.backButtonDisplayMode = .minimal
     let tabBarIndex = tabBarController.selectedIndex
     if tabBarIndex == 0 {
       if let overViewVC = self.viewControllers?[0] as? OverviewViewController {
         overViewVC.retrieveBalance()
+        overViewVC.navigationItem.hidesBackButton = true;
       }
     }
     let secondVC = tabBarController.viewControllers?[2] as! UINavigationController

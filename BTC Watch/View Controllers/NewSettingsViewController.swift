@@ -23,7 +23,7 @@ class NewSettingsViewController: UIViewController, UITableViewDelegate, UITableV
   
   //MARK: Outlets
   
- // @IBOutlet weak var xpubSetting: UITextField!
+  //@IBOutlet weak var xpubSetting: UITextField!
   //@IBOutlet weak var myTable: UITableView!
   @IBOutlet weak var tableView: UITableView!
   

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410D91AD27827FB10092A1B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91AC27827FB10092A1B1 /* ViewController.swift */; };
 		41208EB41FB72C1000F45A9F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41208EB31FB72C1000F45A9F /* SettingsViewController.swift */; };
 		412F3A9A1FD7250C00DAD9D5 /* TouchIdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F3A991FD7250C00DAD9D5 /* TouchIdTableViewCell.swift */; };
 		4153C0342781B7130060EE75 /* ApiKeyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153C0332781B7130060EE75 /* ApiKeyTableViewCell.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		06A0030569A298496C99C888 /* Pods-BTC Watch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTC Watch.release.xcconfig"; path = "Pods/Target Support Files/Pods-BTC Watch/Pods-BTC Watch.release.xcconfig"; sourceTree = "<group>"; };
+		410D91AC27827FB10092A1B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		41208EB31FB72C1000F45A9F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		412F3A991FD7250C00DAD9D5 /* TouchIdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIdTableViewCell.swift; sourceTree = "<group>"; };
 		4153C0332781B7130060EE75 /* ApiKeyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyTableViewCell.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				417B66761FC05388004E5CD2 /* SettingsTableViewController.swift */,
 				41208EB31FB72C1000F45A9F /* SettingsViewController.swift */,
 				C9C3830B1FC7787C0040D99F /* BTCTabBarController.swift */,
+				410D91AC27827FB10092A1B1 /* ViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -338,11 +341,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BTC Watch/Pods-BTC Watch-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/MSAL/MSAL.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSAL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +398,7 @@
 				C9C382FA1FC0E9B20040D99F /* SegueIdentityProvider.swift in Sources */,
 				412F3A9A1FD7250C00DAD9D5 /* TouchIdTableViewCell.swift in Sources */,
 				C9C382FE1FC0ED2D0040D99F /* CurrencyTableViewCell.swift in Sources */,
+				410D91AD27827FB10092A1B1 /* ViewController.swift in Sources */,
 				417B66821FC1C8F5004E5CD2 /* TransactionTableViewController.swift in Sources */,
 				416F45AA1FC33AA40078431D /* CostTxTableViewCell.swift in Sources */,
 				416F45AC1FC5EAA10078431D /* MainTabBarController.swift in Sources */,

@@ -11,6 +11,8 @@ import UIKit
 enum SegueIdentifiers: String, SegueIdentityProvider {
   
   case showCurrencySelection = "SegueShowshowCurrencySelectionViewController"
+  case toTabBar = "SegueShowshowTabBarViewController"
+  case backToSettings = "backToSettings"
 }
 
 

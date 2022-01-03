@@ -54,9 +54,18 @@ extension CurrencyViewController: UITableViewDelegate, UITableViewDataSource {
     let defaults = UserDefaults.standard
     defaults.set(currency, forKey: "currency")
     tableView.reloadData()
-    let tabBarController = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
-    tabBarController.selectedIndex = 2
-    dismiss(animated: true) {}
+    //let tabBarController = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
+    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let homeView  = storyBoard.instantiateViewController(withIdentifier: "BTCTabBarController") as! BTCTabBarController
+    homeView.modalPresentationStyle = .fullScreen
+    homeView.selectedIndex = 2
+    
+    
+    self.present(homeView, animated: true, completion: nil)
+    //let tabBarController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first// as! UITabBarController
+    //self.performSegue(.backToSettings, sender: self)
+    //tabBarController. //.selectedIndex = 2
+    //dismiss(animated: true) {}
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
