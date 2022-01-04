@@ -35,9 +35,9 @@ class NewSettingsViewController: UIViewController, UITableViewDelegate, UITableV
     //UINavigationBar.appearance().barStyle = .default
     //self.xpubSetting = "test"//UserDefaults.standard.string(forKey: "xpub")
     
-    self.apikey = UserDefaults.standard.string(forKey: "apikey")
-    self.passphrase = UserDefaults.standard.string(forKey: "passphrase")
-    self.secret = UserDefaults.standard.string(forKey: "secret")
+    self.apikey = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey")
+    self.passphrase = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase")
+    self.secret = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret")
     
     
     //tableView.reloadData()
@@ -62,21 +62,21 @@ extension NewSettingsViewController: UITextFieldDelegate {
     if(textField.accessibilityIdentifier == "apikey"){
       let defaults = UserDefaults.standard
       if let text = textField.text {
-        defaults.set(text, forKey: "apikey")
+        defaults.set(text, forKey: MyVariables.userObjectId! + "apikey")
       }
       apikey = textField.text
     }
     if(textField.tag == 2){
       let defaults = UserDefaults.standard
       if let text = textField.text {
-        defaults.set(text, forKey: "passphrase")
+        defaults.set(text, forKey: MyVariables.userObjectId! + "passphrase")
       }
       passphrase = textField.text
     }
     if(textField.tag == 3){
       let defaults = UserDefaults.standard
       if let text = textField.text {
-        defaults.set(text, forKey: "secret")
+        defaults.set(text, forKey: MyVariables.userObjectId! + "secret")
       }
       secret = textField.text
     }
@@ -99,7 +99,7 @@ extension NewSettingsViewController: UITextFieldDelegate {
     /*if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: XPubSettingTableViewCell.self), for: indexPath as IndexPath) as! XPubSettingTableViewCell
       cell.xpubTextField.delegate = self
-      if (UserDefaults.standard.string(forKey: "apikey") == "" ){
+      if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey") == "" ){
         cell.xpubTextField.text = "test"
       } else
       {
@@ -126,11 +126,11 @@ extension NewSettingsViewController: UITextFieldDelegate {
     
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ApiKeyTableViewCell.self)) as! ApiKeyTableViewCell
-      if (UserDefaults.standard.string(forKey: "apikey") == "" ){
+      if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey") == "" ){
         cell.apiKeyTextField.text = ""
       } else
       {
-        cell.apiKeyTextField.text = UserDefaults.standard.string(forKey: "apikey")!
+        cell.apiKeyTextField.text = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey")!
       }
       cell.apiKeyTextField.placeholder = "Enter your api key"
       cell.apiKeyLabel.text = "API Key"
@@ -142,11 +142,11 @@ extension NewSettingsViewController: UITextFieldDelegate {
 
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PassphraseTableViewCell.self)) as! PassphraseTableViewCell
-      if (UserDefaults.standard.string(forKey: "passphrase") == "" ){
+      if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase") == "" ){
         cell.passphraseTextField.text = ""
       } else
       {
-        cell.passphraseTextField.text = UserDefaults.standard.string(forKey: "passphrase")!
+        cell.passphraseTextField.text = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase")!
       }
       cell.passphraseTextField.placeholder = "Enter your api key passphrase"
       cell.passphraseLabel.text = "Passphrase"
@@ -158,11 +158,11 @@ extension NewSettingsViewController: UITextFieldDelegate {
     
     if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SecretSettingTableViewCell.self)) as! SecretSettingTableViewCell
-      if (UserDefaults.standard.string(forKey: "secret") == "" ){
+      if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret") == "" ){
         cell.secretTextField.text = ""
       } else
       {
-        cell.secretTextField.text = UserDefaults.standard.string(forKey: "secret")!
+        cell.secretTextField.text = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret")!
       }
       cell.secretTextField.placeholder = "Enter your secret"
       cell.secretLabel.text = "Secret"
@@ -174,10 +174,10 @@ extension NewSettingsViewController: UITextFieldDelegate {
     if indexPath.row == 3 {
       let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CurrencySettingTableViewCell.self)) as! CurrencySettingTableViewCell
       cell.currencySettingLabel.text = "Currency"
-      if (UserDefaults.standard.string(forKey: "currency") == nil ) {
+      if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") == nil ) {
         cell.currencySettingCodeDisplayLabel.text = "GBP"
       } else {
-        cell.currencySettingCodeDisplayLabel.text = UserDefaults.standard.string(forKey: "currency")!
+        cell.currencySettingCodeDisplayLabel.text = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       }
       cell.backgroundColor = UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
       

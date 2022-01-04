@@ -117,13 +117,28 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
                 
                 //MyVariables.accessToken = result.accessToken
                 MyVariables.token = result.accessToken
+                MyVariables.userObjectId = result.uniqueId
                 //self.updateLoggingText(text: "Access token is \(self.accessToken ?? "Empty")")
                 /*self.signOutButton.isEnabled = true
                 self.callGraphButton.isEnabled = true
                 self.editProfileButton.isEnabled = true
                 self.refreshTokenButton.isEnabled = true*/
+            if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey") == nil){
+              UserDefaults.standard.set("", forKey: MyVariables.userObjectId! + "apikey")
+            }
+            if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase") == nil){
+              UserDefaults.standard.set("", forKey: MyVariables.userObjectId! + "passphrase")
+            }
+            if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret") == nil){
+              UserDefaults.standard.set("", forKey: MyVariables.userObjectId! + "secret")
+            }
+            
+            if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") == nil)
+            {
+              UserDefaults.standard.set("GBP", forKey: MyVariables.userObjectId! + "currency")
               
-                self.showSecondViewController()
+            }
+            self.showSecondViewController()
             
             }
         } catch {

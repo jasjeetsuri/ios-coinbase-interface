@@ -50,6 +50,7 @@
 		410D91AE278337BB0092A1B1 /* MSALVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALVars.swift; sourceTree = "<group>"; };
 		410D91B0278394B60092A1B1 /* SignOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutTableViewCell.swift; sourceTree = "<group>"; };
 		410D91B22783950D0092A1B1 /* BlankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankTableViewCell.swift; sourceTree = "<group>"; };
+		410D91B4278499B90092A1B1 /* BTC Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BTC Watch.entitlements"; sourceTree = "<group>"; };
 		41208EB31FB72C1000F45A9F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		412F3A991FD7250C00DAD9D5 /* TouchIdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIdTableViewCell.swift; sourceTree = "<group>"; };
 		4153C0332781B7130060EE75 /* ApiKeyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyTableViewCell.swift; sourceTree = "<group>"; };
@@ -148,6 +149,7 @@
 		93EF0CA21BF41DA20051B5B1 /* BTC Watch */ = {
 			isa = PBXGroup;
 			children = (
+				410D91B4278499B90092A1B1 /* BTC Watch.entitlements */,
 				C9C383061FC0F5630040D99F /* Models */,
 				93EF0CA31BF41DA20051B5B1 /* AppDelegate.swift */,
 				C9C382F81FC0E9920040D99F /* API */,
@@ -563,6 +565,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "BTC Watch/BTC Watch.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -584,6 +587,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "BTC Watch/BTC Watch.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

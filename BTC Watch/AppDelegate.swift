@@ -18,19 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if (UserDefaults.standard.string(forKey: "xpub") == nil){
       UserDefaults.standard.set("a", forKey: "xpub")
     }
-    if (UserDefaults.standard.string(forKey: "apikey") == nil){
-      UserDefaults.standard.set("", forKey: "apikey")
-    }
-    if (UserDefaults.standard.string(forKey: "passphrase") == nil){
-      UserDefaults.standard.set("", forKey: "passphrase")
-    }
-    if (UserDefaults.standard.string(forKey: "secret") == nil){
-      UserDefaults.standard.set("", forKey: "secret")
-    }
-    
-    if (UserDefaults.standard.string(forKey: "currency") == nil){
-      UserDefaults.standard.set("GBP", forKey: "currency")
-    }
+
     UserDefaults.standard.synchronize()
     window?.backgroundColor = UIColor.darkGray
     return true

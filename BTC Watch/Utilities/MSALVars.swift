@@ -28,7 +28,7 @@ struct MyVariables {
   static var applicationContext: MSALPublicClientApplication!
     public var accessToken: String?
   static var webViewParamaters : MSALWebviewParameters?
-  
+  static var userObjectId : String?
 }
 
 class MyMSAL{
@@ -89,6 +89,7 @@ func SetupMSAL() {
 
         guard let thisAccount = try getAccountByPolicy(withAccounts: MyVariables.applicationContext.allAccounts(), policy: MyVariables.kSignupOrSigninPolicy) else {
               //self.updateLoggingText(text: "There is no account available!")
+          print("no account available")
             return "There is no account available!"
           }
           
@@ -117,6 +118,7 @@ func SetupMSAL() {
                               
                               guard let result = result else {
                                   //self.updateLoggingText(text: "Could not acquire new token: \(error ?? "No error informarion" as! Error)")
+                                print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
                                   return
                               }
                               
@@ -128,23 +130,23 @@ func SetupMSAL() {
                       }
                   }
                   
-                  //self.updateLoggingText(text: "Could not acquire token: \(error)")
+                print("Could not acquire token: \(error)")
                   return
               }
               
               guard let result = result else {
                   
-                  //self.updateLoggingText(text: "Could not acquire token: No result returned")
+                print("Could not acquire token: No result returned")
                   return
               }
               
-            MyVariables.token = result.accessToken
+            MyVariables.token = result.uniqueId
               //self.updateLoggingText(text: "Refreshing token silently")
-              //self.updateLoggingText(text: "Refreshed access token is \(self.accessToken ?? "empty")")
+            print("Refreshed access token is \(MyVariables.token ?? "empty")")
               return
           }
       } catch {
-          //self.updateLoggingText(text: "Unable to construct parameters before calling acquire token \(error)")
+        print("Unable to construct parameters before calling acquire token \(error)")
       }
     return MyVariables.token!
   }

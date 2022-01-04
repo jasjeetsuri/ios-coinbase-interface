@@ -132,13 +132,13 @@ class TransactionTableViewController: UITableViewController {
     }
   
   func retrieveTransactions() {
-    if UserDefaults.standard.string(forKey: "apikey") != ""{
-      let secret = UserDefaults.standard.string(forKey: "secret")!
-      let apikey = UserDefaults.standard.string(forKey: "apikey")!
-      let passphrase = UserDefaults.standard.string(forKey: "passphrase")!
+    if UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey") != ""{
+      let secret = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret")!
+      let apikey = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey")!
+      let passphrase = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase")!
       
       let urlEncodedSecret = secret.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
-      let fullUrl = "https://recurringbuy.azurewebsites.net/api/cbTransactions?code=LN0hapy1i1ZLmbZf6cvDJuS2Z12gZU1EsSCnTKDANB9eoV5pNVTqsA==&apikey=\(apikey)&passphrase=\(passphrase)&secret=\(urlEncodedSecret ?? "aa")&currency=" + UserDefaults.standard.string(forKey: "currency")!
+      let fullUrl = "https://recurringbuy.azurewebsites.net/api/cbTransactions?code=LN0hapy1i1ZLmbZf6cvDJuS2Z12gZU1EsSCnTKDANB9eoV5pNVTqsA==&apikey=\(apikey)&passphrase=\(passphrase)&secret=\(urlEncodedSecret ?? "aa")&currency=" + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       
       AF.request(fullUrl)
       .responseJSON { (responseData) -> Void in
@@ -174,9 +174,9 @@ class TransactionTableViewController: UITableViewController {
           
         case let .failure(error):
             print("fail")
-          print("api key: " + UserDefaults.standard.string(forKey: "apikey")!)
-          print("pp: " + UserDefaults.standard.string(forKey: "passphrase")!)
-          print("secret: " + UserDefaults.standard.string(forKey: "secret")!)
+          print("api key: " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey")!)
+          print("pp: " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase")!)
+          print("secret: " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret")!)
           print("url encoded: " + urlEncodedSecret!)
           print("url: " + fullUrl)
         }

@@ -48,11 +48,11 @@ extension CurrencyViewController: UITableViewDelegate, UITableViewDataSource {
     //NSLog("You selected cell number: \(indexPath.row)!")
     let currency = listCode[(indexPath.row)]
     
-    if currency != UserDefaults.standard.string(forKey: "currency")!{
+    if currency != UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!{
       tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
     }
     let defaults = UserDefaults.standard
-    defaults.set(currency, forKey: "currency")
+    defaults.set(currency, forKey: MyVariables.userObjectId! + "currency")
     tableView.reloadData()
     //let tabBarController = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -78,7 +78,7 @@ extension CurrencyViewController: UITableViewDelegate, UITableViewDataSource {
     //cell.detailTextLabel?.text = list[indexPath.row]
     cell.nameLabel.text = listName[indexPath.row]
     cell.codeLabel.text = listCode[indexPath.row]
-    if listCode[indexPath.row] == UserDefaults.standard.string(forKey: "currency")! {
+    if listCode[indexPath.row] == UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")! {
       cell.accessoryType = .checkmark
     }
     else

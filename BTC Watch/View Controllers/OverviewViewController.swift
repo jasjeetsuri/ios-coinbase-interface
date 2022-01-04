@@ -59,7 +59,7 @@ class OverviewViewController: UIViewController {
 
   
   func retrieveBalance() {
-    guard UserDefaults.standard.string(forKey: "apikey") != "" else {
+    guard UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey") != "" else {
       self.resetLabels()
       self.invalidXpub.text = "Add API Key"
       
@@ -108,29 +108,29 @@ class OverviewViewController: UIViewController {
   func setLabels(withBTC balance: BTC) {
     self.invalidXpub.text = ""
     self.BtcBalance.text = String(balance.Total_BTC)
-    self.totalValue.text = String(balance.Total_Fiat) + " " + UserDefaults.standard.string(forKey: "currency")!
-    self.rateGBP.text = String(balance.BTC_to_GBP) + " " + UserDefaults.standard.string(forKey: "currency")!
-    if UserDefaults.standard.string(forKey: "currency") == "GBP"
+    self.totalValue.text = String(balance.Total_Fiat) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
+    self.rateGBP.text = String(balance.BTC_to_GBP) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
+    if UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") == "GBP"
       {
         self.rateEUR.text = String(balance.BTC_to_EUR) + " EUR"
         self.rateUSD.text = String(balance.BTC_to_USD) + " USD"
         //self.rateEUR.text = String(balance.BTC_to_GBP) + " GBP"
-        self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: "currency")!
+        self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
         self.exchangeRate1Lbl.text = "BTC/GBP"
         self.exchangeRate2Lbl.text = "BTC/EUR"
         self.exchangeRate3Lbl.text = "BTC/USD"
       }
-    if UserDefaults.standard.string(forKey: "currency") == "USD" {
+    if UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") == "USD" {
       //self.rateUSD.text = ""
-      self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: "currency")!
+      self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       self.exchangeRate2Lbl.text = "BTC/GBP"
       self.rateEUR.text = String(balance.BTC_to_GBP) + " GBP"
       self.exchangeRate3Lbl.text = "BTC/EUR"
       self.rateUSD.text = String(balance.BTC_to_EUR) + " EUR"
       self.rateGBP.text = String(balance.BTC_to_USD) + " USD"
     }
-    if UserDefaults.standard.string(forKey: "currency") == "EUR" {
-      self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: "currency")!
+    if UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") == "EUR" {
+      self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       self.exchangeRate2Lbl.text = "BTC/GBP"
       self.exchangeRate3Lbl.text = "BTC/USD"
       self.rateEUR.text = String(balance.BTC_to_GBP) + " GBP"
@@ -138,9 +138,9 @@ class OverviewViewController: UIViewController {
       self.rateGBP.text = String(balance.BTC_to_EUR) + " EUR"
     }
     
-    if UserDefaults.standard.string(forKey: "currency") != "EUR" && UserDefaults.standard.string(forKey: "currency") != "GBP" && UserDefaults.standard.string(forKey: "currency") != "USD" {
-      self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: "currency")!
-      self.rateGBP.text = String(balance.BTC_to_GBP) + " " + UserDefaults.standard.string(forKey: "currency")!
+    if UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") != "EUR" && UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") != "GBP" && UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") != "USD" {
+      self.exchangeRate1Lbl.text = "BTC/" + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
+      self.rateGBP.text = String(balance.BTC_to_GBP) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       
       self.exchangeRate2Lbl.text = "BTC/USD"
       self.rateEUR.text = String(balance.BTC_to_USD) + " USD"
@@ -151,11 +151,11 @@ class OverviewViewController: UIViewController {
     }
     
     if balance.isUp == "True"{
-    self.Profit.text = "+" + String(balance.Profit) + " " + UserDefaults.standard.string(forKey: "currency")!
+    self.Profit.text = "+" + String(balance.Profit) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       self.Profit.textColor = UIColor.green
     }
     if balance.isUp == "False"{
-      self.Profit.text = String(balance.Profit) + " " + UserDefaults.standard.string(forKey: "currency")!
+      self.Profit.text = String(balance.Profit) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       self.Profit.textColor = UIColor.red
     }
   }

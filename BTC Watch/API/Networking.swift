@@ -43,7 +43,7 @@ class Networking {
       var route: (path: String, parameters: [String: Any], method: HTTPMethod, secure: Bool) {
         switch self {
         case .retrieveBalance:
-          let params: [String : Any] = ["apikey" : UserDefaults.standard.string(forKey: "apikey")!, "passphrase" : UserDefaults.standard.string(forKey: "passphrase")!, "secret" : UserDefaults.standard.string(forKey: "secret")!, "currency" : UserDefaults.standard.string(forKey: "currency")!]
+          let params: [String : Any] = ["apikey" : UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey")!, "passphrase" : UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase")!, "secret" : UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret")!, "currency" : (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") ?? "") ]
           return (baseUrl + "/api/cbBalance", params, .get, false)
           
         }
