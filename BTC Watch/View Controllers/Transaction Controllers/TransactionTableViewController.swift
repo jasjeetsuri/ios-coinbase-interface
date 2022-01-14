@@ -170,7 +170,8 @@ class TransactionTableViewController: UITableViewController {
           let myVar =  MyMSAL()
           let newToken = myVar.refreshToken()
           print("Global variable: \(newToken)")
-  
+          self.TransactionTable.reloadData()
+          self.tableView.reloadData()
           
         case let .failure(error):
             print("fail")

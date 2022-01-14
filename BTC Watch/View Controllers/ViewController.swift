@@ -79,16 +79,63 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
             self.updateLoggingText(text: "Unable to create application \(error)")
         }*/
       initUI()
+      signIn()
 
     }
     
+  
+  @objc func signIn()  {
 
-  @objc func signInButton(_ sender: UIButton) {
+    do{
 
     let myVar =  MyMSAL()
+      myVar.SetupMSAL()
+    guard let thisAccount = try getAccountByPolicy(withAccounts: MyVariables.applicationContext.allAccounts(), policy: MyVariables.kSignupOrSigninPolicy) else {
+      myVar.SetupMSAL()
+      interactiveLogin()
+      
+      return
+      }
     myVar.SetupMSAL()
-    MyVariables.webViewParamaters = MSALWebviewParameters(authPresentationViewController: self)
+    myVar.refreshToken()
+    showSecondViewController()
+    } catch {
+      print("FAIL \(error)")
+    }
+  }
+  
+
+  @objc func signInButton(_ sender: UIButton)  {
+
+    do{
+
+    let myVar =  MyMSAL()
+      myVar.SetupMSAL()
+    guard let thisAccount = try getAccountByPolicy(withAccounts: MyVariables.applicationContext.allAccounts(), policy: MyVariables.kSignupOrSigninPolicy) else {
+      myVar.SetupMSAL()
+      interactiveLogin()
+      
+      return
+      }
+    myVar.SetupMSAL()
+    myVar.refreshToken()
+    showSecondViewController()
+    } catch {
+      print("FAIL \(error)")
+    }
+  
+    
+   /* if MyVariables.token != nil
+      {
+        myVar.SetupMSAL()
+        myVar.refreshToken()
+        showSecondViewController()
+    }
+    if MyVariables.token == nil {
+      myVar.SetupMSAL()
     self.interactiveLogin()
+    }*/
+
 
     
   }
@@ -99,7 +146,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         do {
             let authority = try getAuthority(forPolicy: MyVariables.kSignupOrSigninPolicy)
 
-            
+           MyVariables.webViewParamaters = MSALWebviewParameters(authPresentationViewController: self)
           let parameters = MSALInteractiveTokenParameters(scopes: MyVariables.kScopes, webviewParameters: MyVariables.webViewParamaters!)
             parameters.promptType = .selectAccount
             parameters.loginHint = "jasjeet@pm.me"
