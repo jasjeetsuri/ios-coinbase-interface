@@ -26,6 +26,7 @@ class OverviewViewController: UIViewController {
   @IBOutlet weak var exchangeRate1Lbl: UILabel!
   @IBOutlet weak var exchangeRate2Lbl: UILabel!
   @IBOutlet weak var exchangeRate3Lbl: UILabel!
+  @IBOutlet weak var profitPercentage: UILabel!
   //@IBOutlet weak var selectedCurrency: UILabel!
   
   // MARK: - View Life Cycle
@@ -107,6 +108,7 @@ class OverviewViewController: UIViewController {
   
   func setLabels(withBTC balance: BTC) {
     self.invalidXpub.text = ""
+    
     self.BtcBalance.text = String(balance.Total_BTC)
     self.totalValue.text = String(balance.Total_Fiat) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
     self.rateGBP.text = String(balance.BTC_to_GBP) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
@@ -151,12 +153,16 @@ class OverviewViewController: UIViewController {
     }
     
     if balance.isUp == "True"{
-    self.Profit.text = "+" + String(balance.Profit) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
+      self.Profit.text = "+" + String(balance.Profit) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       self.Profit.textColor = UIColor.green
+      self.profitPercentage.text = "+" + String(balance.ProfitPercentage) + " %"
+      self.profitPercentage.textColor = UIColor.green
     }
     if balance.isUp == "False"{
       self.Profit.text = String(balance.Profit) + " " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       self.Profit.textColor = UIColor.red
+      self.profitPercentage.text = String(balance.ProfitPercentage) + " %"
+      self.profitPercentage.textColor = UIColor.red
     }
   }
   

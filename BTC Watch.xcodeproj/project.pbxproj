@@ -11,6 +11,12 @@
 		410D91AF278337BB0092A1B1 /* MSALVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91AE278337BB0092A1B1 /* MSALVars.swift */; };
 		410D91B1278394B60092A1B1 /* SignOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91B0278394B60092A1B1 /* SignOutTableViewCell.swift */; };
 		410D91B32783950D0092A1B1 /* BlankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91B22783950D0092A1B1 /* BlankTableViewCell.swift */; };
+		410D91B62791F8520092A1B1 /* RecurringBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91B52791F8520092A1B1 /* RecurringBuyTableViewCell.swift */; };
+		410D91BA279206FA0092A1B1 /* StartDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91B9279206FA0092A1B1 /* StartDateTableViewCell.swift */; };
+		410D91BC2792074B0092A1B1 /* FrequencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91BB2792074B0092A1B1 /* FrequencyTableViewCell.swift */; };
+		410D91BE279207730092A1B1 /* RecurringBuyEnabledTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91BD279207730092A1B1 /* RecurringBuyEnabledTableViewCell.swift */; };
+		410D91C227920AEA0092A1B1 /* RecurringBuyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91C127920AEA0092A1B1 /* RecurringBuyViewController.swift */; };
+		410D91C42792DDF70092A1B1 /* RecurringAmountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D91C32792DDF70092A1B1 /* RecurringAmountTableViewCell.swift */; };
 		41208EB41FB72C1000F45A9F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41208EB31FB72C1000F45A9F /* SettingsViewController.swift */; };
 		412F3A9A1FD7250C00DAD9D5 /* TouchIdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F3A991FD7250C00DAD9D5 /* TouchIdTableViewCell.swift */; };
 		4153C0342781B7130060EE75 /* ApiKeyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153C0332781B7130060EE75 /* ApiKeyTableViewCell.swift */; };
@@ -51,6 +57,12 @@
 		410D91B0278394B60092A1B1 /* SignOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutTableViewCell.swift; sourceTree = "<group>"; };
 		410D91B22783950D0092A1B1 /* BlankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankTableViewCell.swift; sourceTree = "<group>"; };
 		410D91B4278499B90092A1B1 /* BTC Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BTC Watch.entitlements"; sourceTree = "<group>"; };
+		410D91B52791F8520092A1B1 /* RecurringBuyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringBuyTableViewCell.swift; sourceTree = "<group>"; };
+		410D91B9279206FA0092A1B1 /* StartDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateTableViewCell.swift; sourceTree = "<group>"; };
+		410D91BB2792074B0092A1B1 /* FrequencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyTableViewCell.swift; sourceTree = "<group>"; };
+		410D91BD279207730092A1B1 /* RecurringBuyEnabledTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringBuyEnabledTableViewCell.swift; sourceTree = "<group>"; };
+		410D91C127920AEA0092A1B1 /* RecurringBuyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringBuyViewController.swift; sourceTree = "<group>"; };
+		410D91C32792DDF70092A1B1 /* RecurringAmountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringAmountTableViewCell.swift; sourceTree = "<group>"; };
 		41208EB31FB72C1000F45A9F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		412F3A991FD7250C00DAD9D5 /* TouchIdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIdTableViewCell.swift; sourceTree = "<group>"; };
 		4153C0332781B7130060EE75 /* ApiKeyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyTableViewCell.swift; sourceTree = "<group>"; };
@@ -194,6 +206,7 @@
 				41208EB31FB72C1000F45A9F /* SettingsViewController.swift */,
 				C9C3830B1FC7787C0040D99F /* BTCTabBarController.swift */,
 				410D91AC27827FB10092A1B1 /* ViewController.swift */,
+				410D91C127920AEA0092A1B1 /* RecurringBuyViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -256,6 +269,11 @@
 				4153C0372781D5210060EE75 /* HeadingTableViewCell.swift */,
 				410D91B0278394B60092A1B1 /* SignOutTableViewCell.swift */,
 				410D91B22783950D0092A1B1 /* BlankTableViewCell.swift */,
+				410D91B52791F8520092A1B1 /* RecurringBuyTableViewCell.swift */,
+				410D91B9279206FA0092A1B1 /* StartDateTableViewCell.swift */,
+				410D91BB2792074B0092A1B1 /* FrequencyTableViewCell.swift */,
+				410D91BD279207730092A1B1 /* RecurringBuyEnabledTableViewCell.swift */,
+				410D91C32792DDF70092A1B1 /* RecurringAmountTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -397,12 +415,14 @@
 				417B66791FC05E09004E5CD2 /* CurrencyViewController.swift in Sources */,
 				417B66771FC05388004E5CD2 /* SettingsTableViewController.swift in Sources */,
 				C9C383041FC0F16A0040D99F /* Networking.swift in Sources */,
+				410D91C227920AEA0092A1B1 /* RecurringBuyViewController.swift in Sources */,
 				417B667B1FC07E73004E5CD2 /* NewSettingsViewController.swift in Sources */,
 				C9C382F21FC0D4110040D99F /* SegueIdentifiers.swift in Sources */,
 				410D91AF278337BB0092A1B1 /* MSALVars.swift in Sources */,
 				417B66861FC1F5E3004E5CD2 /* Transaction.swift in Sources */,
 				4153C0362781B72C0060EE75 /* PassphraseTableViewCell.swift in Sources */,
 				417B66881FC1F65D004E5CD2 /* TransactionApi.swift in Sources */,
+				410D91BE279207730092A1B1 /* RecurringBuyEnabledTableViewCell.swift in Sources */,
 				C9C383021FC0EE0B0040D99F /* XPubSettingTableViewCell.swift in Sources */,
 				C9C3830C1FC7787C0040D99F /* BTCTabBarController.swift in Sources */,
 				93EF0CA61BF41DA20051B5B1 /* OverviewViewController.swift in Sources */,
@@ -410,8 +430,10 @@
 				93EF0CA41BF41DA20051B5B1 /* AppDelegate.swift in Sources */,
 				C9C382FA1FC0E9B20040D99F /* SegueIdentityProvider.swift in Sources */,
 				412F3A9A1FD7250C00DAD9D5 /* TouchIdTableViewCell.swift in Sources */,
+				410D91BA279206FA0092A1B1 /* StartDateTableViewCell.swift in Sources */,
 				C9C382FE1FC0ED2D0040D99F /* CurrencyTableViewCell.swift in Sources */,
 				410D91AD27827FB10092A1B1 /* ViewController.swift in Sources */,
+				410D91BC2792074B0092A1B1 /* FrequencyTableViewCell.swift in Sources */,
 				410D91B32783950D0092A1B1 /* BlankTableViewCell.swift in Sources */,
 				417B66821FC1C8F5004E5CD2 /* TransactionTableViewController.swift in Sources */,
 				416F45AA1FC33AA40078431D /* CostTxTableViewCell.swift in Sources */,
@@ -420,7 +442,9 @@
 				C9C382F61FC0E8F10040D99F /* Colours.swift in Sources */,
 				4153C0342781B7130060EE75 /* ApiKeyTableViewCell.swift in Sources */,
 				C9C383001FC0EDF90040D99F /* CurrencySettingTableViewCell.swift in Sources */,
+				410D91C42792DDF70092A1B1 /* RecurringAmountTableViewCell.swift in Sources */,
 				C9C3830A1FC0F9F70040D99F /* UIViewController.swift in Sources */,
+				410D91B62791F8520092A1B1 /* RecurringBuyTableViewCell.swift in Sources */,
 				4153C0382781D5210060EE75 /* HeadingTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

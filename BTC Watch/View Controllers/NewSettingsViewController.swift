@@ -92,7 +92,7 @@ extension NewSettingsViewController: UITextFieldDelegate {
 
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 6
+    return 7
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -183,15 +183,22 @@ extension NewSettingsViewController: UITextFieldDelegate {
       
       return(cell)
     }
-    
     if indexPath.row == 4 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RecurrngBuyTableViewCell.self)) as! RecurrngBuyTableViewCell
+      cell.menuLabel.text = "Setup recurring buy"
+      cell.backgroundColor = UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
+      
+      return(cell)
+    }
+    
+    if indexPath.row == 5 {
       let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: BlankTableViewCell.self)) as! BlankTableViewCell
 
       cell.backgroundColor = UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
       
       return(cell)
     }
-    if indexPath.row == 5 {
+    if indexPath.row == 6 {
       let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SignOutTableViewCell.self)) as! SignOutTableViewCell
       cell.signOutLabel.text = "Sign out"
 
@@ -210,7 +217,7 @@ extension NewSettingsViewController: UITextFieldDelegate {
       self.performSegue(.showCurrencySelection, sender: self)
     }
     
-    if indexPath.row == 5 {
+    if indexPath.row == 6 {
       //self.performSegue(.showCurrencySelection, sender: self)
       let myVar =  MyMSAL()
       myVar.signOut()

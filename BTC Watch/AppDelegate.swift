@@ -7,6 +7,8 @@
 //
 
 import UIKit
+//import BackgroundTasks
+//import Logger
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,14 +17,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    if (UserDefaults.standard.string(forKey: "xpub") == nil){
-      UserDefaults.standard.set("a", forKey: "xpub")
+    if (UserDefaults.standard.string(forKey: "amount") == nil){
+      UserDefaults.standard.set("", forKey: "ampunt")
     }
 
     UserDefaults.standard.synchronize()
     window?.backgroundColor = UIColor.darkGray
+    
+    
+   /* if #available(iOS 13, *) {
+      let appRefreshTaskId = "task_refresh_id_recurring_buy"
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: appRefreshTaskId, using: nil) { task in
+            Logger.shared.info("[BGTASK] Perform bg fetch \(appRefreshTaskId)")
+            task.setTaskCompleted(success: true)
+            self.scheduleAppRefresh()
+        }
+    }*/
+    
     return true
   }
+  
+  /*@available(iOS 13.0, *)
+  func scheduleAppRefresh() {
+      let request = BGAppRefreshTaskRequest(identifier: "task_refresh_id_recurring_buy")
+      request.earliestBeginDate = Date(timeIntervalSinceNow: 5 * 60) // Refresh after 5 minutes.
+      do {
+          try BGTaskScheduler.shared.submit(request)
+      } catch {
+          print("Could not schedule app refresh task \(error.localizedDescription)")
+      }
+  }*/
   
   func applicationWillResignActive(_ application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -30,8 +54,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func applicationDidEnterBackground(_ application: UIApplication) {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+  /*    Logger.shared.info("App did enter background")
+      if #available(iOS 13, *) {
+          self.scheduleAppRefresh()
+          self.scheduleBackgroundProcessing()
+      }*/
   }
   
   func applicationWillEnterForeground(_ application: UIApplication) {
@@ -45,6 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
+  
+
   
   
 }

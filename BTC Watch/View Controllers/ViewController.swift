@@ -79,7 +79,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
             self.updateLoggingText(text: "Unable to create application \(error)")
         }*/
       initUI()
-      signIn()
+      //signIn()
 
     }
     
@@ -96,9 +96,11 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
       
       return
       }
-    myVar.SetupMSAL()
+      
+    //myVar.SetupMSAL()
     myVar.refreshToken()
-    showSecondViewController()
+    
+        //showSecondViewController()
     } catch {
       print("FAIL \(error)")
     }
@@ -118,8 +120,8 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
       return
       }
     myVar.SetupMSAL()
-    myVar.refreshToken()
-    showSecondViewController()
+      interactiveLogin()//myVar.refreshToken()
+       // showSecondViewController()
     } catch {
       print("FAIL \(error)")
     }
