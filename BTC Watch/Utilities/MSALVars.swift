@@ -214,7 +214,7 @@ class MyMSAL{
           
         }
         //self.updateLoggingText(text: "Refreshing token silently")
-        print("Refreshed access token is \(MyVariables.token ?? "empty")")
+        //print("Refreshed access token is \(MyVariables.token ?? "empty")")
         print("fail7")
         return
       }

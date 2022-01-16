@@ -32,6 +32,7 @@ class RecurringBuyViewController: UIViewController {
     tableView.separatorColor = UIColor.darkGray
     //datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
     //settingsBackButton.Uol
+    self.hideKeyboardWhenTappedAround() 
   }
   
   // MARK: Actions
@@ -218,4 +219,14 @@ extension RecurringBuyViewController: UIPickerViewDelegate, UIPickerViewDataSour
   }
   
 }
-
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}

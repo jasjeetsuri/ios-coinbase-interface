@@ -22,37 +22,25 @@ class TransactionTableViewController: UITableViewController {
   var gain = [String]()
   
   @IBOutlet var TransactionTable: UITableView!
-
+  
   @objc func refresh(sender:AnyObject)
   {
-      // Updating your data here...
-
+    // Updating your data here...
+    
     let group = DispatchGroup()
-            group.enter()
-      DispatchQueue.global().async(execute: {
-            DispatchQueue.main.sync {
-                self.retrieveTransactions()
-                group.leave()
-            }})
-            
-            group.notify(queue: .main) {
-                print("Simulation finished")
-              self.tableView.reloadData()
-              self.refreshControl?.endRefreshing()
-            }
+    group.enter()
+    DispatchQueue.global().async(execute: {
+      DispatchQueue.main.sync {
+        self.retrieveTransactions()
+        
+        group.leave()
+      }})
     
-    
-    
-    
-    
-    /*DispatchQueue.main.async {
-        // Run UI Updates
-      self.retrieveTransactions()
-      
+    group.notify(queue: .main) {
+      print("Simulation finished")
+      self.tableView.reloadData()
+      self.refreshControl?.endRefreshing()
     }
-
-    self.tableView.reloadData()
-    self.refreshControl?.endRefreshing()*/
     
   }
   
@@ -60,7 +48,7 @@ class TransactionTableViewController: UITableViewController {
     super.viewDidLoad()
     TransactionTable.rowHeight = 90
     TransactionTable.backgroundColor =  UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
-
+    
     //self.tableView.reloadData()
     //retrieveTransactions()
     //self.tableView.dataSource = self
@@ -73,10 +61,10 @@ class TransactionTableViewController: UITableViewController {
     
     
     self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
-
     
-    }
-
+    
+  }
+  
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -85,46 +73,46 @@ class TransactionTableViewController: UITableViewController {
     //self.tableView.reloadData()
     
   }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return count
-    }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  // MARK: - Table view data source
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return count
+  }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     if incoming[indexPath.row] == "true" {
-  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath as IndexPath) as! TransactionTableViewCell
-          if count != 0 {
-              cell.buyLbl.text = "Purchased"
-              cell.valueLbl.text = "Value"
-              cell.costLbl.text = "Cost"
-              //cell.dateLbl.text = ""
-              //cell.btcLbl.text = "BTC"
-              cell.buyBtcValue.text = btc[indexPath.row] + " BTC"
-              cell.valueAmount.text = value[indexPath.row]
-              cell.costAmount.text = cost[indexPath.row]
-              cell.dateTX.text = time[indexPath.row]
-              cell.profitPercent.text = profit[indexPath.row]
-              cell.selectionStyle = .none
-            
-            if gain[indexPath.row] == "true"{
-              cell.profitPercent.textColor = UIColor.white
-              cell.profitPercent.backgroundColor = UIColor(red: 10.0/255.0 , green:  220.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
-            }
-            if gain[indexPath.row] == "false"{
-              cell.profitPercent.textColor = UIColor.white
-              cell.profitPercent.backgroundColor = UIColor.red
-            }
-              cell.profitPercent.layer.masksToBounds = true
-              cell.profitPercent.layer.cornerRadius = 7
-              return cell
-          }
+      let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath as IndexPath) as! TransactionTableViewCell
+      if count != 0 {
+        cell.buyLbl.text = "Purchased"
+        cell.valueLbl.text = "Value"
+        cell.costLbl.text = "Cost"
+        //cell.dateLbl.text = ""
+        //cell.btcLbl.text = "BTC"
+        cell.buyBtcValue.text = btc[indexPath.row] + " BTC"
+        cell.valueAmount.text = value[indexPath.row]
+        cell.costAmount.text = cost[indexPath.row]
+        cell.dateTX.text = time[indexPath.row]
+        cell.profitPercent.text = profit[indexPath.row]
+        cell.selectionStyle = .none
+        
+        if gain[indexPath.row] == "true"{
+          cell.profitPercent.textColor = UIColor.white
+          cell.profitPercent.backgroundColor = UIColor(red: 10.0/255.0 , green:  220.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
+        }
+        if gain[indexPath.row] == "false"{
+          cell.profitPercent.textColor = UIColor.white
+          cell.profitPercent.backgroundColor = UIColor.red
+        }
+        cell.profitPercent.layer.masksToBounds = true
+        cell.profitPercent.layer.cornerRadius = 7
+        return cell
+      }
     }
     if incoming[indexPath.row] == "false" {
       let cell = tableView.dequeueReusableCell(withIdentifier: "CostTxTableViewCell", for: indexPath as IndexPath) as! CostTxTableViewCell
@@ -147,7 +135,7 @@ class TransactionTableViewController: UITableViewController {
     self.TransactionTable.reloadData()
     self.tableView.reloadData()
     return UITableViewCell()
-    }
+  }
   
   func retrieveTransactions() {
     if UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey") != ""{
@@ -159,49 +147,50 @@ class TransactionTableViewController: UITableViewController {
       let fullUrl = "https://recurringbuy.azurewebsites.net/api/cbTransactions?code=LN0hapy1i1ZLmbZf6cvDJuS2Z12gZU1EsSCnTKDANB9eoV5pNVTqsA==&apikey=\(apikey)&passphrase=\(passphrase)&secret=\(urlEncodedSecret ?? "aa")&currency=" + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency")!
       
       AF.request(fullUrl)
-      .responseJSON { (responseData) -> Void in
-        switch responseData.result {
+        .responseJSON { (responseData) -> Void in
+          switch responseData.result {
           case let .success(responseData):
             let swiftyJsonVar = JSON(responseData)
-          //print(swiftyJsonVar.arrayObject![2])
-          self.count = swiftyJsonVar.count
-          let json = JSON(responseData)
-          self.btc.removeAll()
-          self.cost.removeAll()
-          self.profit.removeAll()
-          self.time.removeAll()
-          self.value.removeAll()
-          self.gain.removeAll()
-          self.incoming.removeAll()
-          
-          for (key, subJson) in json {
-            //print(subJson["btc"])
-            self.btc.append(subJson["btc"].stringValue)
-            self.cost.append(subJson["cost"].stringValue)
-            self.profit.append(subJson["profit"].stringValue)
-            self.time.append(subJson["time"].stringValue)
-            self.value.append(subJson["value"].stringValue)
-            self.incoming.append(subJson["incoming"].stringValue)
-            self.gain.append(subJson["gain"].stringValue)
-          }
-       
-          let myVar =  MyMSAL()
-          let newToken = myVar.refreshToken()
-          print("Global variable: \(newToken)")
-          self.TransactionTable.reloadData()
-          self.tableView.reloadData()
-          
-        case let .failure(error):
+            //print(swiftyJsonVar.arrayObject![2])
+            self.count = swiftyJsonVar.count
+            let json = JSON(responseData)
+            self.btc.removeAll()
+            self.cost.removeAll()
+            self.profit.removeAll()
+            self.time.removeAll()
+            self.value.removeAll()
+            self.gain.removeAll()
+            self.incoming.removeAll()
+            
+            for (key, subJson) in json {
+              //print(subJson["btc"])
+              self.btc.append(subJson["btc"].stringValue)
+              self.cost.append(subJson["cost"].stringValue)
+              self.profit.append(subJson["profit"].stringValue)
+              print(self.profit)
+              self.time.append(subJson["time"].stringValue)
+              self.value.append(subJson["value"].stringValue)
+              self.incoming.append(subJson["incoming"].stringValue)
+              self.gain.append(subJson["gain"].stringValue)
+            }
+            
+            let myVar =  MyMSAL()
+            let newToken = myVar.refreshToken()
+            //print("Global variable: \(newToken)")
+            self.TransactionTable.reloadData()
+            self.tableView.reloadData()
+            
+          case let .failure(error):
             print("fail")
-          print("api key: " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey")!)
-          print("pp: " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase")!)
-          print("secret: " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret")!)
-          print("url encoded: " + urlEncodedSecret!)
-          print("url: " + fullUrl)
+            print("api key: " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey")!)
+            print("pp: " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase")!)
+            print("secret: " + UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret")!)
+            print("url encoded: " + urlEncodedSecret!)
+            print("url: " + fullUrl)
+          }
         }
-      }
     }
   }
-  }
+}
 
 
