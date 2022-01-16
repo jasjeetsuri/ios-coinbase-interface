@@ -134,7 +134,7 @@ extension RecurringBuyViewController: UITableViewDelegate, UITableViewDataSource
         cell.amountText.text = UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "amount")!
       }
       cell.amountText.placeholder = "Enter amount to buy"
-    
+      cell.amountText.keyboardType = UIKeyboardType.numberPad
       return(cell)
     }
     if indexPath.row == 1 {

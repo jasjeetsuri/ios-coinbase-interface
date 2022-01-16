@@ -27,14 +27,32 @@ class TransactionTableViewController: UITableViewController {
   {
       // Updating your data here...
 
-    DispatchQueue.main.async {
+    let group = DispatchGroup()
+            group.enter()
+      DispatchQueue.global().async(execute: {
+            DispatchQueue.main.sync {
+                self.retrieveTransactions()
+                group.leave()
+            }})
+            
+            group.notify(queue: .main) {
+                print("Simulation finished")
+              self.tableView.reloadData()
+              self.refreshControl?.endRefreshing()
+            }
+    
+    
+    
+    
+    
+    /*DispatchQueue.main.async {
         // Run UI Updates
       self.retrieveTransactions()
       
     }
 
     self.tableView.reloadData()
-    self.refreshControl?.endRefreshing()
+    self.refreshControl?.endRefreshing()*/
     
   }
   
