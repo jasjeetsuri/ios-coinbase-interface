@@ -104,15 +104,101 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
             group.enter()
       DispatchQueue.global().async(execute: {
             DispatchQueue.main.sync {
-                myVar.refreshToken()
-                group.leave()
+                //myVar.refreshToken()
+              do {
+                
+                let authority = try getAuthority(forPolicy: MyVariables.kSignupOrSigninPolicy)
+                
+                guard let thisAccount = try self.getAccountByPolicy(withAccounts: MyVariables.applicationContext.allAccounts(), policy: MyVariables.kSignupOrSigninPolicy) else {
+                  //self.updateLoggingText(text: "There is no account available!")
+                  print("fail8")
+                  return
+                }
+                
+                let parameters = MSALSilentTokenParameters(scopes: MyVariables.kScopes , account:thisAccount)
+                parameters.authority = authority
+                parameters.forceRefresh = true
+                print("fail11")
+                MyVariables.applicationContext.acquireTokenSilent(with: parameters) { (result, error) in
+                  if let error = error {
+                    print("fail10")
+                    let nsError = error as NSError
+                    
+                    // interactionRequired means we need to ask the user to sign-in. This usually happens
+                    // when the user's Refresh Token is expired or if the user has changed their password
+                    // among other possible reasons.
+                    print("fail1")
+                    
+                    if (nsError.domain == MSALErrorDomain) {
+                      print("fail4")
+                      if (nsError.code == MSALError.interactionRequired.rawValue) {
+                        
+                        // Notice we supply the account here. This ensures we acquire token for the same account
+                        // as we originally authenticated.
+                        print("fail2")
+                        let parameters = MSALInteractiveTokenParameters(scopes: MyVariables.kScopes, webviewParameters: MyVariables.webViewParamaters!)
+                        parameters.account = thisAccount
+                        MyVariables.applicationContext.acquireToken(with: parameters) { (result, error) in
+                          guard let result = result else {
+                            //self.updateLoggingText(text: "Could not acquire new token: \(error ?? "No error informarion" as! Error)")
+                            print("fail3")
+                            return
+                          }
+                          
+                          MyVariables.token = result.accessToken
+                          print("fail5")
+                          //self.updateLoggingText(text: "Access token is \(self.accessToken ?? "empty")")
+                        }
+                        print("fail9")
+                        return
+                      }
+                    }
+                    print("Could not acquire token: \(error)")
+                    return
+                  }
+                  
+                  guard let result = result
+                  else {
+                    print("Could not acquire token: No result returned")
+                    return
+                  }
+                  MyVariables.token = result.accessToken
+                  MyVariables.userObjectId = result.uniqueId
+                  print("fail6")
+                  if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "apikey") == nil){
+                    UserDefaults.standard.set("", forKey: MyVariables.userObjectId! + "apikey")
+                  }
+                  if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "passphrase") == nil){
+                    UserDefaults.standard.set("", forKey: MyVariables.userObjectId! + "passphrase")
+                  }
+                  if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "secret") == nil){
+                    UserDefaults.standard.set("", forKey: MyVariables.userObjectId! + "secret")
+                  }
+                  
+                  if (UserDefaults.standard.string(forKey: MyVariables.userObjectId! + "currency") == nil)
+                  {
+                    UserDefaults.standard.set("GBP", forKey: MyVariables.userObjectId! + "currency")
+                    
+                  }
+                  //self.updateLoggingText(text: "Refreshing token silently")
+                  //print("Refreshed access token is \(MyVariables.token ?? "empty")")
+                  print("fail7")
+                  group.leave()
+                }
+              } catch {
+                print("Unable to construct parameters before calling acquire token \(error)")
+              }
+              //MyVariables.token = result.accessToken
+              //return
+            
+                
             }})
             
             group.notify(queue: .main) {
-                print("Simulation finished")
+              print("Simulation finished")
               self.showSecondViewController()
             }
-    
+      
       
     } catch {
       print("FAIL \(error)")

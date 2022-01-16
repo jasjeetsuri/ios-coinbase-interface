@@ -30,6 +30,7 @@ class RecurringBuyViewController: UIViewController {
     super.viewDidLoad()
     tableView.backgroundColor = UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
     tableView.separatorColor = UIColor.darkGray
+    tableView.alwaysBounceVertical = false;
     //datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
     //settingsBackButton.Uol
     self.hideKeyboardWhenTappedAround() 
@@ -61,16 +62,11 @@ class RecurringBuyViewController: UIViewController {
     formatter3.dateFormat =  "MM/dd/yyyy, hh:mm aa"
     let myDate = formatter3.string(from: sender.date)
     defaults.set(myDate, forKey: MyVariables.userObjectId! + "date")
+    //enabledSwitch!.setOn(false, animated: true)
     
-    
-    /*dateFormatter.dateFormat =  "MM/dd/YYYY, HH:mm a"
-    let myDate = sender.date.formatted(ISO8601DateFormatter)
-    //.getFormattedDate(format: "yyyy-MM-dd HH:mm:ss")
-    defaults.set(myDate, forKey: MyVariables.userObjectId! + "date")  //as! Date
-    //print("date:" + myDate.formatted())
-    
-    startDate = myDate*/
-    
+    let indexPath = IndexPath(row: 3, section: 0)
+    let cell = tableView.cellForRow(at: indexPath) as! RecurringBuyEnabledTableViewCell
+    cell.enabledToggle!.setOn(false, animated: true)
   }
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int,
@@ -80,6 +76,9 @@ class RecurringBuyViewController: UIViewController {
     frequency = myFreq
     let defaults = UserDefaults.standard
     defaults.set(row, forKey: MyVariables.userObjectId! + "frequency")
+    let indexPath = IndexPath(row: 3, section: 0)
+    let cell = tableView.cellForRow(at: indexPath) as! RecurringBuyEnabledTableViewCell
+    cell.enabledToggle!.setOn(false, animated: true)
   }
   
 
@@ -98,6 +97,9 @@ extension RecurringBuyViewController: UITextFieldDelegate {
         print(text)
       }
       amount = sender.text
+      let indexPath = IndexPath(row: 3, section: 0)
+      let cell = tableView.cellForRow(at: indexPath) as! RecurringBuyEnabledTableViewCell
+      cell.enabledToggle!.setOn(false, animated: true)
     }
   }
 }

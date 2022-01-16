@@ -150,12 +150,13 @@ class MyMSAL{
         return
       }
       
-      let parameters = MSALSilentTokenParameters(scopes: MyVariables.kScopes, account:thisAccount)
+      let parameters = MSALSilentTokenParameters(scopes: MyVariables.kScopes , account:thisAccount)
       parameters.authority = authority
-      
-      
+      parameters.forceRefresh = true
+      print("fail11")
       MyVariables.applicationContext.acquireTokenSilent(with: parameters) { (result, error) in
         if let error = error {
+          print("fail10")
           let nsError = error as NSError
           
           // interactionRequired means we need to ask the user to sign-in. This usually happens
@@ -183,6 +184,7 @@ class MyMSAL{
                 print("fail5")
                 //self.updateLoggingText(text: "Access token is \(self.accessToken ?? "empty")")
               }
+              print("fail9")
               return
             }
           }

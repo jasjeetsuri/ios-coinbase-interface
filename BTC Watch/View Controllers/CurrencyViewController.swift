@@ -30,6 +30,7 @@ class CurrencyViewController: UIViewController {
     super.viewDidLoad()
     tableView.backgroundColor = UIColor(red: 30.0/255.0 , green:  30.0/255.0 , blue :  30.0/255.0 , alpha: 1.0)
     tableView.separatorColor = UIColor.darkGray
+    tableView.alwaysBounceVertical = false;
     //settingsBackButton.Uol
   }
   
